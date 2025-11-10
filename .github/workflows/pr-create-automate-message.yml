@@ -1,0 +1,44 @@
+name: Pull Request — Welcome Message
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  pr_welcome:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Post automated PR welcome message
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = context.payload.pull_request.number;
+            const prAuthor = context.payload.pull_request.user.login;
+
+            const message = `
+Hey @${prAuthor} 👋
+
+Thanks for opening this Pull Request! 🎉  
+A maintainer will review your changes soon.
+
+Before review, please confirm:
+- ✅ The PR title and description clearly explain the change  
+- 🧩 Code follows our contribution guidelines ([CONTRIBUTING.md](./CONTRIBUTING.md))  
+- 🧪 Tests (if any) are added or updated  
+- 🔒 No sensitive data is included  
+
+We appreciate your effort in improving **EduMind AI Study Assistant** — great job! 💪
+`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: prNumber,
+              body: message
+            });
