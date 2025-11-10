@@ -1,0 +1,31 @@
+name: Auto Request Admin Review on PR
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  request_review:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+
+    steps:
+      - name: Request review from admin
+        uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const prNumber = context.payload.pull_request.number;
+
+            // GitHub username of the admin
+            const adminReviewer = ["dimpal-yadav"]; // replace with your GitHub username
+
+            await github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: prNumber,
+              reviewers: adminReviewer
+            });
+
+            console.log(`Requested review from: ${adminReviewer.join(", ")}`);
