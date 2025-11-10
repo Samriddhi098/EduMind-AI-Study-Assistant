@@ -75,6 +75,14 @@ It brings together smart tools like **Notes**, **To-Do List**, **Timer**, and **
 - Add them to the configuration section of your project (e.g., in `config.js` or `script.js`)
 
 ---
+## 🧩 PR Level Scoring
+
+PR (Pull Request) levels determine contributor scores:  
+- 🥉 **Level 1 → 2 points**  
+- 🥈 **Level 2 → 5 points**  
+- 🥇 **Level 3 → 11 points**
+
+---
 
 ## 🧑‍💻 Author
 
@@ -85,6 +93,14 @@ It brings together smart tools like **Notes**, **To-Do List**, **Timer**, and **
 
 ---
 
+## ⭐ GitHub Support
+
+If you like this project, please show your support!  
+
+[![Star on GitHub](https://img.shields.io/github/stars/dimpal-yadav/edumind-ai-assistant?style=social)](https://github.com/dimpal-yadav/edumind-ai-assistant/stargazers)
+[![Fork on GitHub](https://img.shields.io/github/forks/dimpal-yadav/edumind-ai-assistant?style=social)](https://github.com/dimpal-yadav/edumind-ai-assistant/network/members)
+
+---
 ## 🏁 Conclusion
 
 **EduMind – AI Study Assistant** redefines digital learning by blending productivity, creativity, and intelligent features into a single web platform.  
