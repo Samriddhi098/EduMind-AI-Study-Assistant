@@ -1,0 +1,43 @@
+name: Auto Close Stale Issues
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # Runs once every day at midnight UTC
+  workflow_dispatch: # Allows manual trigger
+
+jobs:
+  close_stale_issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+
+    steps:
+      - name: Close issues stale for 14 days
+        uses: actions/stale@v9
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          days-before-stale: 14          # Mark issues as stale after 14 days
+          days-before-close: 2           # Close 2 days after being marked stale
+          stale-issue-message: >
+            👋 This issue has been automatically marked as stale because it has had no activity for **14 days**.  
+            If this issue is still relevant, please leave a comment to keep it open.  
+            Otherwise, it will be closed automatically in 2 days. ⏳
+
+          close-issue-message: >
+            🔒 This issue has been closed automatically due to inactivity for over 16 days.  
+            Feel free to reopen it if the problem persists or you have more information. 🙌
+
+          stale-pr-message: >
+            👋 This pull request has been automatically marked as stale due to no recent activity.  
+            Please update or comment to keep it open.
+
+          close-pr-message: >
+            🔒 This pull request has been closed due to inactivity.  
+            You can reopen it anytime if you plan to continue working on it.
+
+          days-before-pr-stale: 30       # (optional) PRs become stale after 30 days
+          days-before-pr-close: 7
+          stale-issue-label: 'stale'
+          exempt-issue-labels: 'pinned,security,critical'  # Issues with these labels won't be closed
+          remove-stale-when-updated: true
