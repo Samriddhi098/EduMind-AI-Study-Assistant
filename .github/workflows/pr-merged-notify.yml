@@ -7,7 +7,9 @@ on:
 jobs:
   notify_merged:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true  # Only run if PR was merged
+
+    # Ensure job only runs when PR is merged (not just closed)
+    if: github.event.pull_request.merged == true
 
     steps:
       - name: Notify contributor
@@ -18,7 +20,7 @@ jobs:
             const prNumber = context.payload.pull_request.number;
             const prAuthor = context.payload.pull_request.user.login;
 
-            const message = 
+            const message =
               "Hi @" + prAuthor + " 👏\n\n" +
               "Your Pull Request #" + prNumber + " has been **merged** successfully! 🎉\n" +
               "Thank you for your contribution to **EduMind AI Study Assistant**. 🚀";
